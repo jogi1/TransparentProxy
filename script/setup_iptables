@@ -1,0 +1,6 @@
+#cd /lib/modules/2.6.20-16-generic/kernel/net/netfilter/
+#for x in `ls |perl -pe 's/.ko//'` ; do modprobe $x ; done
+modprobe nfnetlink_queue
+iptables -p udp -A INPUT  -d 192.168.222.2 --dport 27001 -j NFQUEUE
+iptables -p udp -A OUTPUT  -s 192.168.222.2 --sport 27001 -j NFQUEUE
+
